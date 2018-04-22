@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+      <div id="status"> </div>
+      <div id="log"> </div>
+      <div id="new"> </div>
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+      var socket = io('/nsp1');
+      socket.on('connection_failed', function(){document.write('Unable to connect.')});
+      socket.on('wel', function(data){
+        //document.getElementById('status').innerHTML = data.welcone;
+      });
+      socket.on('message', (msg)=>{ document.write(msg)});
+
+      socket.on('Connecting', function(){
+        document.write('Conecting...');
+      });
+      socket.emit('room_no');
+      socket.on('Room message', function(){ console.write('Ok'); });
+      socket.on('room_no_res', function(){ document.write('Jeste s w pokoju ');});
+      socket.on('connectToRoom', function(data){
+        document.write('OK' + data);
+      });
+
+      </script>
+  </body>
+</html>

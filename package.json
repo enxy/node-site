@@ -1,0 +1,25 @@
+{
+  "name": "socket-chat",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.1.2",
+    "mongodb": "^3.0.6",
+    "socket.io": "^2.1.0"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "socket",
+    "node.js"
+  ],
+  "author": "Jola",
+  "license": "ISC"
+}

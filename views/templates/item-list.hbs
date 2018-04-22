@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <body>
+     <h2>All items inserted into database</h2>
+     <ul>
+       {{ item }}
+       {{# each books }}
+        <li>{{ this.title }} {{ this.content }} {{this.author}}</li>
+      {{/each }}
+     </ul>
+   </body>
+</html>

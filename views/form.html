@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+      <script src = "/socket.io/socket.io.js"></script>
+     <script>
+        var socket = io('/chat');
+     </script>
+   </head>
+   <body>
+     <section id="insert">
+       <form action='/insert' method="post">
+         <label for="title">Title</title>
+         <input type="text" id="title" name="title">
+         <label for="content">Content</title>
+         <input type="text" id="content" name="content">
+         <label for="authon">Author</title>
+         <input type="text" id="authon" name="authon">
+         <button type="submit">SUBMIT</button>
+       </form>
+   </section>
+   </body>
+</html>

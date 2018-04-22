@@ -1,0 +1,30 @@
+<h1>{{ title }}</h1>
+
+<p> Hello {{ user }} </p>
+
+{{# if condition }}
+   <p>The condition i met</p>
+{{ else }}
+  <p>The condition is not met</p>
+{{/if}}
+<ul>
+  {{# each arr as |key val|}}
+  <li>{{ key }}: {{ val }}</li>
+  {{/each}}
+</ul>
+<label for="name2">Name: </label>
+<input type="text" name="name2" placeholder="Enter name">
+<button type="submit">Send</button>
+<script>
+  var socket = io('http://localhost:3000/');
+  socket.on('connect', function(err){
+    console.log('succesfully connected');
+  });
+  let button = document.querySelector('button').addEventListener('click', function(){
+    let userValue = document.querySelector('input').value;
+    if( userValue ){
+      console.log(userValue);
+      socket.emit('user_value', {value: userValue });
+    }
+  });
+</script>

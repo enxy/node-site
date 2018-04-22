@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+      <script src = "/socket.io/socket.io.js"></script>
+     <script>
+        var socket = io('/chat');
+     </script>
+   </head>
+   <body>
+     <div>
+        <h2>Hello welcome to chat online!</h2>
+        <input id="username" type = "text" name = "name" value = "" placeholder = "Enter your name!">
+        <button type = "button" name = "button">Let me chat!</button>
+    </div>
+    <div id="messanger" style="display: none;">
+      <p id="loggedAs"></p>
+      <input type="text" id="message" name="message" value="Insert text">
+      <button id="form" type="submit">Send message</button>
+    </div>
+    <script>
+      document.getElementById("form").addEventListener('click', function(){
+        console.log(document.getElementById('username').value, 'kgkgkgk');
+        socket.emit('setUser', document.getElementById('username').value);
+      });
+      //socket.emit('setUser', 'Kaska');
+      // function sendForm(){
+      //   console.log(document.getElementById('username').value);
+      //   socket.emit('setUser', document.getElementById('username').value);
+      // }
+      socket.on('correctUsername', function(user){
+        var user = user.username;
+        console.log('okk', user);
+      });
+      socket.on('usernameExists', function(data){
+        var user = data.user;
+        console.log('okk', user);
+      });
+    </script>
+   </body>
+</html>

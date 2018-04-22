@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <div id="status"> </div>
+    <div id="log"> </div>
+    <div id="new"> </div>
+    <h2></h2>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      var form = document.getElementsByTagName('form')[0];
+
+      // socket.on('message', function(data){
+      //   document.getElementById('status').innerHTML += data.name;
+      // });
+      socket.on('broadcast', function(data){
+        document.getElementById('status').innerHTML = '<pre>'+data.desc+'</pre>';
+      })
+      socket.on('testEmit', function(data){
+          document.getElementById('log').innerHTML += data.desc;
+      });
+      socket.emit('clientEmit', 'Sent from the Client!' );
+
+      socket.on('newClient', function(data){
+          document.getElementById('new').innerHTML = data;
+      });
+
+
+
+
+      //___________________________________________
+      socket.emit('welcome', 'You are connected in online-chat');
+
+      socket.on('welcome', function(inv){
+        var h2 = document.getElementsByTagName('h2')[0];
+        h2.innerText = inv;
+      });
+      socket.emit('connection', 'Hello there');
+
+      socket.on('connection', function(msg){
+        document.getElementById('status').innerHTML = msg;
+      });
+
+      form.onsubmit = function(){
+        socket.emit('chat message', form.firstElementChild.value);
+            form.firstElementChild.value='';
+            return false;
+      };
+      socket.on('chat message', function(msg){
+        var li = document.createElement('li');
+        li.innerHTML = msg;
+        document.getElementById("messages").append(li);
+      });
+
+
+    </script>
+  </body>
+</html>

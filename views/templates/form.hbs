@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+      <script src = "/socket.io/socket.io.js"></script>
+     <script>
+        var socket = io('/user');
+     </script>
+   </head>
+   <body>
+     {{# if params }}
+       <span> You have succesfully inserted new book!</spam>
+         <ul>New book in a collection
+           {{# each params as |key value|}}
+              <li> {{ key }}: {{ value }} </li>
+          {{/each}}
+         </ul>
+      {{/ if}}
+     <section id="insert">
+         <label for="title">Title</title>
+         <input type="text" id="title" name="title">
+         <label for="content">Content</title>
+         <input type="text" id="content" name="content">
+         <label for="author">Author</title>
+         <input type="text" id="author" name="authon">
+         <button type="submit">SUBMIT</button>
+   </section>
+
+   <script>
+    let button = document.querySelector('button').addEventListener('click', function(){
+      let title = document.querySelector('#title').value;
+      let content = document.querySelector('#content').value;
+      let author = document.querySelector('#author').value;
+
+      let data = {title, content, author};
+      console.log(data);
+      socket.emit('userData', data);
+    });
+   </script>
+   </body>
+</html>
